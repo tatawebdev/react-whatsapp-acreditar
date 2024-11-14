@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.scroller {
+  scrollbar-width: thin;
+  scrollbar-color: #394045 transparent;
+}
+
+/* styles.css ou App.css */
+.chat-background {
+  background-image: url('./assets/bg-chat.png');
+}
+
+
+.fundo{
+  background-color: rgba(11, 20, 26, 0.95);
+}
+
+canvas {
+  border-radius: 8px;
+  background-color: #333;
+}
+
+canvas, .progress-bar {
+  width: 100%;
+  height: 50px;
+}
+.pt-6-px {
+  padding-top: 6px;
+}
+
+.pl-9-px {
+  padding-left: 9px;
+}
+
+.pr-7-px {
+  padding-right: 7px;
+}
+
+.pb-8-px {
+  padding-bottom: 8px;
+}

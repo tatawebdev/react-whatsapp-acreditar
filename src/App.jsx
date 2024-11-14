@@ -1,7 +1,16 @@
-export default function App() {
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRouter from "./router/appRouter";
+
+const App = () => {
   return (
-    <h1 className="text-xl font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
+    <Router>
+      <AppRouter />
+
+
+      
+    </Router>
+  );
+};
+
+export default App;

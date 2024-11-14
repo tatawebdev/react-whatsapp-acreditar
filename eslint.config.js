@@ -37,6 +37,13 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      // Adicionando a configuração para ignorar o import React
+      'no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^React$', // Ignora a variável React importada
+        },
+      ],
     },
   },
 ]
