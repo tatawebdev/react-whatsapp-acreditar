@@ -60,10 +60,10 @@ export default function ChatBalloon({
             <AudioDownloadIcon />
             <PlayButton />
             <VideoIcon />
-            <ReactAudioPlayer
+            {/* <ReactAudioPlayer
               src="/teste.mp3" // Link do arquivo de áudio
               controls
-            />
+            /> */}
             {/* <AudioPlayer audioUrl="/teste.mp3" /> */}
           </span>
         )}

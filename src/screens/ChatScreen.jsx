@@ -4,6 +4,7 @@ import HeaderChat from "../components/Chat/HeaderChat";
 import ChatMessages from "../components/Chat/ChatMessages";
 import FooterChat from "../components/Chat/FooterChat";
 import { useSelectedUser } from "../context/contatos/SelectedUserContext";
+import Voice from "../components/BaloesChat/VoiceRecorder";
 
 
 
