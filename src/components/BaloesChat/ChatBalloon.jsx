@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   DeliveredStatus,
+  FailedStatus,
   None,
   PendingStatus,
   ReadStatus,
   SentStatus,
 } from "./StatusMessage";
+
+
+
 
 export default function ChatBalloon(props) {
   const {
@@ -25,17 +29,15 @@ export default function ChatBalloon(props) {
     delivered: DeliveredStatus,
     read: ReadStatus,
     pending: PendingStatus,
+    failed: FailedStatus,
   };
 
-  // const StatusComponent = statusComponents[status] || None;
-  const StatusComponent = statusComponents[status] || ReadStatus; //Debug
-
-  console.log(StatusComponent);
-
+  const StatusComponent = statusComponents[status] || None;
+  timestamp
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const alignmentClass = !sent_by_user ? "justify-start" : "justify-end";
+  const alignmentClass = !!sent_by_user ? "justify-start" : "justify-end";
 
   return (
     <>
@@ -50,7 +52,7 @@ export default function ChatBalloon(props) {
 
         <div
           className={`flex flex-col max-w-[320px] leading-1.5 pt-6-px pl-9-px pr-7-px pb-8-px mb-1.5 border-gray-200 bg-gray-100 ${
-            !sent_by_user
+            !!sent_by_user
               ? "rounded-e-xl rounded-es-xl "
               : "rounded-s-xl rounded-ss-xl"
           } dark:bg-[#005c4b]`}
@@ -77,7 +79,7 @@ export default function ChatBalloon(props) {
                   14:12
                 </span>
               </span>
-              {!!sent_by_user && (
+              {!sent_by_user && (
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                   <StatusComponent />
                 </span>
@@ -153,23 +155,3 @@ export default function ChatBalloon(props) {
   );
 }
 
-ChatBalloon.propTypes = {
-  id: PropTypes.string,
-  conversation_id: PropTypes.string,
-  content: PropTypes.string,
-  sent_by_user: PropTypes.bool,
-  from: PropTypes.string,
-  message_id: PropTypes.string,
-  timestamp: PropTypes.string,
-  type: PropTypes.string,
-  created_at: PropTypes.string,
-  updated_at: PropTypes.string,
-  status: PropTypes.string,
-  error_data: PropTypes.object,
-  conversation_session_id: PropTypes.string,
-
-  children: PropTypes.node,
-  user_name: PropTypes.string,
-  user_img_src: PropTypes.string,
-  message_drop_down: PropTypes.string,
-};

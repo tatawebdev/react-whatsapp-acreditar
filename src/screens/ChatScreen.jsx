@@ -10,13 +10,7 @@ import Voice from "../components/BaloesChat/VoiceRecorder";
 
 const ChatScreen = () => {
   const { selectedUser } = useSelectedUser();
-  const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [selectedUser]); 
 
 
   if (!selectedUser) {
@@ -24,15 +18,15 @@ const ChatScreen = () => {
   }
  
 
+
+
   return (
     <div className="flex flex-col bg-[#0b141a] flex-grow chat-background">
       <div className="flex justify-between bg-[#202c33] px-4 py-2">
         <HeaderChat />
       </div>
 
-      <div ref={messagesEndRef} className="flex flex-col space-y-4 w-full py-4 px-10 xl:px-24 bg-black-rgba scroller overflow-x-hidden overflow-y-auto flex-grow fundo">
-        <ChatMessages />
-      </div>
+      <ChatMessages />
 
       <FooterChat />
     </div>

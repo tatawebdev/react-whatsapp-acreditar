@@ -27,19 +27,3 @@ export default function MessageText(props) {
   // );
 }
 
-
-MessageText.propTypes = {
-  id: PropTypes.string,
-  conversation_id: PropTypes.string,
-  content: PropTypes.string,
-  sent_by_user: PropTypes.bool,
-  from: PropTypes.string,
-  message_id: PropTypes.string,
-  timestamp: PropTypes.string,
-  type: PropTypes.string,
-  created_at: PropTypes.string,
-  updated_at: PropTypes.string,
-  status: PropTypes.string,
-  error_data: PropTypes.object,
-  conversation_session_id: PropTypes.string,
-};

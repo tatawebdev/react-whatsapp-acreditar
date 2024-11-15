@@ -89,4 +89,40 @@ const PendingStatus = () => (
   </span>
 );
 
-export { SentStatus, DeliveredStatus, ReadStatus, PendingStatus, None };
+
+const FailedStatus = () => (
+  <span
+    aria-hidden="false"
+    aria-label="Falha"
+    data-icon="msg-failed"
+    className="text-red-500"
+  >
+    <svg
+      viewBox="0 0 16 16"
+      height="16"
+      width="16"
+      preserveAspectRatio="xMidYMid meet"
+      fill="none"
+    >
+      <title>Mensagem Falha</title>
+      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
+      <line
+        x1="5"
+        y1="5"
+        x2="11"
+        y2="11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <line
+        x1="11"
+        y1="5"
+        x2="5"
+        y2="11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </span>
+);
+export { SentStatus, DeliveredStatus, ReadStatus, PendingStatus, None , FailedStatus};

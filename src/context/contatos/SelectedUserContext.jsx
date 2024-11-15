@@ -15,6 +15,7 @@ export const SelectedUserProvider = ({ children }) => {
       lastFetchTime && new Date() - new Date(lastFetchTime) > 60000; // 60000ms = 1 minuto
 
     if (selectedUser) {
+
       // Se o ID do usuário for diferente ou já passou 1 minuto, faça a requisição
       if (selectedUser.id !== lastUserId || canFetchAgain) {
         console.log(conversationData, "aqui");
@@ -23,7 +24,7 @@ export const SelectedUserProvider = ({ children }) => {
           try {
             const response = await fetchConversationById(selectedUser.id);
             if (response.data) {
-              setConversationData(response.data); // Atualiza os dados da conversa
+              setConversationData(response.data?.data); // Atualiza os dados da conversa
               setLastFetchTime(new Date()); // Atualiza o tempo da última requisição
               setLastUserId(selectedUser.id); // Atualiza o último ID do usuário
             } else {
@@ -41,11 +42,11 @@ export const SelectedUserProvider = ({ children }) => {
         );
       }
     }
-  }, [selectedUser, lastUserId, lastFetchTime, conversationData]); // Dependências de selectedUser, lastUserId e lastFetchTime
+  }, [selectedUser, lastUserId, lastFetchTime, conversationData]);
 
   return (
     <SelectedUserContext.Provider
-      value={{ selectedUser, setSelectedUser, conversationData }}
+      value={{ selectedUser, setSelectedUser, conversationData, setConversationData }}
     >
       {children}
     </SelectedUserContext.Provider>

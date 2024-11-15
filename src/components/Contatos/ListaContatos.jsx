@@ -33,8 +33,7 @@ export default function ListaContatos() {
   // Função para tratar o clique no item
   const handleClick = (user) => {
     setSelectedUser(user);
-    // Aqui você pode fazer outras ações, como abrir um chat, exibir detalhes, etc.
-    console.log("Usuário selecionado:", user.contact_name);
+    console.log("Usuário selecionado:", user);
   };
 
   if (loading) return <div>Loading...</div>; // Exibe enquanto carrega
