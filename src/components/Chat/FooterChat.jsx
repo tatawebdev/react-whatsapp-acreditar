@@ -73,7 +73,7 @@ const BiMicrophone = ({ buttonVoice, setButtonVoice, isRecording, setIsRecording
   };
 
   useEffect(() => {
-    console.log("Estado do buttonVoice mudou:", buttonVoice);
+    //console.log("Estado do buttonVoice mudou:", buttonVoice);
   }, [buttonVoice, isRecording]);
 
   return (
@@ -124,7 +124,7 @@ const FooterChat = () => {
             });
             const audioUrl = URL.createObjectURL(audioBlob);
 
-            console.log("Áudio gravado:", audioUrl);
+            //console.log("Áudio gravado:", audioUrl);
             audioChunks.current = [];
           };
           mediaRecorderRef.current.start();
@@ -179,7 +179,7 @@ const FooterChat = () => {
       setConversationData((prevData) =>
         prevData.map((msg) => {
           // Verificar se o ID da mensagem corresponde
-          console.log(unique_identifier)
+          //console.log(unique_identifier)
           if (msg.unique_identifier == unique_identifier) {
             return {
               ...msg, sent_by_user: 0, status,

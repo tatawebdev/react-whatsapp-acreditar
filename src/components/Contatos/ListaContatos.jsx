@@ -18,7 +18,7 @@ export default function ListaContatos() {
         if (error) throw new Error(error.message); // Lança erro caso exista
         setConversations(data);
 
-        console.log(data);
+        //console.log(data);
       } catch (err) {
         setError(err.message); // Captura e define o erro
       } finally {
@@ -33,7 +33,7 @@ export default function ListaContatos() {
   // Função para tratar o clique no item
   const handleClick = (user) => {
     setSelectedUser(user);
-    console.log("Usuário selecionado:", user);
+    //console.log("Usuário selecionado:", user);
   };
 
   if (loading) return <div>Loading...</div>; // Exibe enquanto carrega

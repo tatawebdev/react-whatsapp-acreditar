@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export default function MessageText(props) {
   const { content } = props;
   
-  console.log(Object.keys(props));
+  //console.log(Object.keys(props));
   return (
     <ChatBalloon>
       <p className="text-sm font-normal text-gray-900 dark:text-white">

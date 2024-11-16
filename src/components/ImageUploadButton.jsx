@@ -56,11 +56,11 @@ export default function ImageUploadButton() {
 
                 const { from, contact_name } = selectedUser
 
-                console.log(selectedUser, "aqui_selectedUser")
+                //console.log(selectedUser, "aqui_selectedUser")
 
                 // Chama a função sendMessageImage
                 const response = await sendMessageImage(selectedFile, from, contact_name);
-                console.log("Imagem enviada com sucesso:", response.data);
+                //console.log("Imagem enviada com sucesso:", response.data);
                 handleCloseModal(); // Fecha o modal após o envio
             } catch (error) {
                 console.error("Erro ao enviar a imagem:", error);

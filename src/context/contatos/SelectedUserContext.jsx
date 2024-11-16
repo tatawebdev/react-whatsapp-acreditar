@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import { fetchConversationById } from "../../services/contatoService";
 
@@ -9,6 +9,7 @@ export const SelectedUserProvider = ({ children }) => {
   const [conversationData, setConversationData] = useState(null); // Dados da conversa
   const [lastFetchTime, setLastFetchTime] = useState(null); // Tempo da última requisição
   const [lastUserId, setLastUserId] = useState(null); // Armazena o último ID do usuário
+  const [scrollTop, setScrollTop] = useState(0);
 
   useEffect(() => {
     const canFetchAgain =
@@ -18,7 +19,7 @@ export const SelectedUserProvider = ({ children }) => {
 
       // Se o ID do usuário for diferente ou já passou 1 minuto, faça a requisição
       if (selectedUser.id !== lastUserId || canFetchAgain) {
-        console.log(conversationData, "aqui");
+        //console.log(conversationData, "aqui");
 
         const fetchUserConversations = async () => {
           try {
@@ -28,10 +29,10 @@ export const SelectedUserProvider = ({ children }) => {
               setLastFetchTime(new Date()); // Atualiza o tempo da última requisição
               setLastUserId(selectedUser.id); // Atualiza o último ID do usuário
             } else {
-              console.log("Nenhuma conversa encontrada.");
+              //console.log("Nenhuma conversa encontrada.");
             }
           } catch (error) {
-            console.log("Erro ao buscar conversas do usuário:", error);
+            //console.log("Erro ao buscar conversas do usuário:", error);
           }
         };
 
@@ -42,7 +43,7 @@ export const SelectedUserProvider = ({ children }) => {
         );
       }
     }
-  }, [selectedUser, lastUserId, lastFetchTime, conversationData]);
+  }, [selectedUser]);
 
   return (
     <SelectedUserContext.Provider

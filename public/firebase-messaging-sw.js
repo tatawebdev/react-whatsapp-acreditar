@@ -21,7 +21,7 @@ const messaging = firebase.messaging();
 
 // Escutar mensagens recebidas em segundo plano
 messaging.onBackgroundMessage(function (payload) {
-    console.log('Mensagem de segundo plano recebida:', payload);
+    //console.log('Mensagem de segundo plano recebida:', payload);
     // const notificationTitle = payload.notification.title;
     // const notificationOptions = {
     //     body: payload.notification.body,

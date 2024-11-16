@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Configura o URL base e o cabeçalho de autenticação
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiUrl = import.meta.env.VITE_BASE_URL + "/api";
 const apiKey = import.meta.env.VITE_API_KEY;
 
 // Cria uma instância do axios
@@ -17,13 +17,13 @@ const AxiosInstance = axios.create({
 function handleError(error) {
   if (error.response) {
     // O servidor respondeu com um código de status fora da faixa de 2xx
-    console.log('API Error:', error.response.data.message || error.message);
+    //console.log('API Error:', error.response.data.message || error.message);
   } else if (error.request) {
     // A solicitação foi feita, mas nenhuma resposta foi recebida
-    console.log('Network Error:', error.message);
+    //console.log('Network Error:', error.message);
   } else {
     // Algo aconteceu ao configurar a solicitação
-    console.log('Error:', error.message);
+    //console.log('Error:', error.message);
   }
 }
 

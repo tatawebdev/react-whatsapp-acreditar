@@ -13,7 +13,7 @@ function useFCMToken(token) {
 
             post('/phone/token', data)
                 .then((response) => {
-                    console.log('Resposta do servidor:', response);
+                    //console.log('Resposta do servidor:', response);
                     localStorage.setItem('fcm_token', token);
                 })
                 .catch((error) => {

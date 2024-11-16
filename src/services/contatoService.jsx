@@ -5,7 +5,7 @@ export const fetchAllConversations = async () => {
     return await post('/chat/conversations')
         .then((result) => result)
         .catch((error) => {
-            console.log("Error fetching all conversations:", error);
+            //console.log("Error fetching all conversations:", error);
             return { data: null, error };
         });
 };
@@ -16,7 +16,7 @@ export const fetchConversationById = async (id = null) => {
     return await post(endpoint)
         .then((result) => result)
         .catch((error) => {
-            console.log("Error fetching conversation by ID:", error);
+            //console.log("Error fetching conversation by ID:", error);
             return { data: null, error };
         });
 };
