@@ -1,98 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { FaTimes } from "react-icons/fa";
-import { useFullScreen } from "../../context/images/FullScreenContext";
-import { DownloadButton } from "./images/FullScreenButton";
+import React, { useState, useEffect } from "react";
+import { FaTimes } from "react-icons/fa"; // Importando o ícone de "X" do react-icons
+import { getImage } from "../../services/chatService";
 import { useDownloadContext } from "../../context/images/DownloadContext";
 import { loadImageFromCache, saveImageToCache } from "../../utils/cacheService";
 
 export default function ImageAttachment(props) {
-  const { isFullScreen, handleFullScreen, handleCloseFullScreen } = useFullScreen();
-  const { fileby_content, content, cacheEnabled = true } = props; // Adiciona cacheEnabled como prop
-  const {
-    addFileToDownloadQueue,
-    filesToDownload,
-    loadingFile,
-    removeFileFromQueue,
-  } = useDownloadContext();
+  const { content, fileby_content } = props;
 
-  const [srcImage, setSrcImage] = useState(fileby_content?.file_url);
   const [fileAdded, setFileAdded] = useState(false);
+  const [image, setImage] = useState(fileby_content?.file_url);
+  const { addFileToDownload, imgSrc } = useDownloadContext();
 
-  const srcImagePadrao = "https://flowbite.com/docs/images/blog/image-2.jpg";
-  const download = !srcImage;
-
+  
   useEffect(() => {
-    const cachedImage = loadImageFromCache(content);
-    if (cachedImage) {
-      setSrcImage(cachedImage);
-    } else if (
-      !srcImage &&
-      !filesToDownload.some((file) => file.fileID === content) &&
-      !fileAdded
-    ) {
-      addFileToDownloadQueue(content);
+    if (!image) {
       setFileAdded(true);
+      addFileToDownload(props);
     }
-  }, [content, srcImage, filesToDownload, addFileToDownloadQueue, fileAdded, cacheEnabled]);
-
-  useEffect(() => {
-    if (!srcImage && download && filesToDownload.length) {
-      const currentFile = filesToDownload.find(
-        (file) => file.fileID === content && file?.loading
-      );
-
-      if (currentFile) {
-        if (currentFile.fileUrl) {
-          setSrcImage(currentFile.fileUrl);
-          saveImageToCache(content, currentFile.fileUrl);
-          removeFileFromQueue();
-        }
-      }
-    }
-  }, [loadingFile, srcImage, download, filesToDownload, content, removeFileFromQueue]);
+  }, []);
 
   return (
     <>
       <div className="group relative mt-2">
-        <div
-          onClick={!download ? handleFullScreen : null}
-          className={`absolute w-[350px] h-full bg-gray-900/50 ${download ? "opacity-100" : "opacity-0"} transition-opacity duration-300 rounded-lg flex items-center justify-center ${!download ? "cursor-pointer" : ""}`}
-        >
-          {!!download && (
-            <DownloadButton
-              fileID={content}
-              loading={!fileby_content?.file_url && loadingFile}
-              srcimage={srcImage}
-              setSrcImage={setSrcImage}
-            />
-          )}
+        <div className="absolute w-[350px] h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+          <button
+            data-tooltip-target="download-image"
+            className="inline-flex items-center justify-center rounded-full h-10 w-10 bg-white/30 hover:bg-white/50 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50"
+          >
+            <svg
+              className="w-5 h-5 text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1.5 12s3.5-7 10.5-7 10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          </button>
         </div>
         <img
-          src={srcImage ?? srcImagePadrao}
+          src={fileby_content?.file_url || imgSrc || "https://flowbite.com/docs/images/blog/image-2.jpg"} // Exibe a imagem em base64 ou uma imagem padrão
           className="rounded-lg w-[350px]"
-          alt="Imagem"
+          alt="Preview"
         />
       </div>
-
-      {isFullScreen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
-          onClick={handleCloseFullScreen}
-        >
-          <button
-            className="absolute top-5 right-5 text-white text-3xl focus:outline-none"
-            onClick={handleCloseFullScreen}
-          >
-            <FaTimes />
-          </button>
-          <img
-            src={srcImage ?? srcImagePadrao}
-            className="rounded-lg max-w-full max-h-full z-50"
-            alt="Full Screen"
-          />
-        </div>
-      )}
     </>
   );
 }
- 

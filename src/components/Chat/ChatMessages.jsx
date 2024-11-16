@@ -3,7 +3,7 @@ import { useSelectedUser } from "../../context/contatos/SelectedUserContext";
 import MessageText from "../BaloesChat/MessageText";
 import { messaging } from "../../services/firebaseConfig";
 import { onMessage } from "firebase/messaging";
-import ImageAttachment from "../BaloesChat/ImageAttachment-cache";
+import ImageAttachment from "../BaloesChat/ImageAttachment";
 
 const componentMap = {
   message_text: MessageText,
@@ -53,7 +53,7 @@ export default function ChatMessages() {
       } else {
         newMessage.sent_by_user = 1;
 
-        console.log(newMessage, "content_content_newMessage")
+        console.log(newMessage, "content_content_newMessage");
         setConversationData((prevData) => [...prevData, newMessage]);
       }
     });
@@ -69,13 +69,10 @@ export default function ChatMessages() {
       <div className="chat-container">
         {conversationData &&
           conversationData.map((msg, index) => {
-              const Component = componentMap[msg.type] || MessageText;
-            return (
-              <>
-                <Component key={msg.unique_identifier || msg.message_id} {...msg} />
-                {/* {msg.content} */}
-              </>
-            );
+            const Component = componentMap[msg.type] || MessageText;
+            const key =
+              msg.unique_identifier || msg.message_id || `${msg.type}-${index}`;
+            return <Component key={key} {...msg} />;
           })}
       </div>
     </div>
