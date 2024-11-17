@@ -1,12 +1,35 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Mp3Encoder } from 'lamejs';
+import React, { Component } from "react";
+import MicRecorder from "mic-recorder-to-mp3";
+const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
-const AudioRecorder = () => {
-    const encoder = new Mp3Encoder(2, 44100, 128);
+export default class AudioConverter extends Component {
+  state = {
+    isRecording: false,
+    blobURL: "",
+    isBlocked: false,
+  };
 
-console.log(encoder)
-    return;
+  componentDidMount() {
+    navigator.getUserMedia(
+      { audio: true },
+      () => {
+        console.log("Permission Granted");
+        this.setState({ isBlocked: false });
+      },
+      () => {
+        console.log("Permission Denied");
+        this.setState({ isBlocked: true });
+      }
+    );
+  }
 
+  
+
+  render() {
+    return (
+      <div>
+        <>ok</>
+      </div>
+    );
+  }
 }
-
-export default AudioRecorder;

@@ -1,0 +1,32 @@
+.emoji-panel {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .emoji-header h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .emoji-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .emoji-item {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .emoji-item:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .emoji-selected {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  

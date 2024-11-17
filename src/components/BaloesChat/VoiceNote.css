@@ -1,0 +1,35 @@
+/* Estilizando o input de range (controle deslizante) */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #4caf50; /* Cor da track */
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Estilizando o thumb (círculo do controle deslizante) */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff; /* Cor do thumb */
+    cursor: pointer;
+  }
+  
+  /* Estilizando o thumb para Firefox */
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  
+  /* Estilizando a track quando o controle deslizante está sendo movido */
+  input[type="range"]:active {
+    background: #388e3c;
+  }
+  

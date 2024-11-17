@@ -4,7 +4,8 @@ import HeaderChat from "../components/Chat/HeaderChat";
 import ChatMessages from "../components/Chat/ChatMessages";
 import FooterChat from "../components/Chat/FooterChat";
 import { useSelectedUser } from "../context/contatos/SelectedUserContext";
-import Voice from "../components/BaloesChat/VoiceRecorder";
+import EmojiPicker from 'emoji-picker-react';
+
 
 const ChatScreen = () => {
   const { selectedUser } = useSelectedUser();
@@ -18,7 +19,6 @@ const ChatScreen = () => {
       <div className="flex justify-between bg-[#202c33] px-4 py-2">
         <HeaderChat />
       </div>
-
       <ChatMessages />
       {selectedUser?.isActive && <FooterChat />}
     </div>
