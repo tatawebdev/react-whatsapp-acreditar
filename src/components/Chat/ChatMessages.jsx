@@ -7,11 +7,13 @@ import ImageAttachment from "../BaloesChat/ImageAttachment";
 
 import alertSound from "../../assets/audio/alert.mp3";
 import VoiceNote from "../BaloesChat/VoiceNote";
+import Document from "../BaloesChat/Document";
 
 const componentMap = {
   message_text: MessageText,
   image: ImageAttachment,
   audio: VoiceNote,
+  document: Document,
 };
 
 export default function ChatMessages() {
