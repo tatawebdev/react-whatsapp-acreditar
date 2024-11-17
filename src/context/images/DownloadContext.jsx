@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getImage } from "../../services/chatService";
+import { getResourcebyFileID } from "../../services/chatService";
 import { saveImageToCache } from "../../utils/cacheService";
 
 const DownloadContext = createContext();
@@ -37,7 +37,7 @@ export const DownloadProvider = ({ children }) => {
       setLoadingFile(true);
 
       try {
-        const response = await getImage(nextFile.content);
+        const response = await getResourcebyFileID(nextFile.content);
         if (!response?.error) {
 
           saveImageToCache(nextFile.content, response)

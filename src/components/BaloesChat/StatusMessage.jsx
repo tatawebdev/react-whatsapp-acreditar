@@ -1,12 +1,12 @@
 import React from "react";
 
 // Componente de Status Enviado
-const SentStatus = () => (
+const SentStatus = ({ height = "11", width = "16" }) => (
   <span aria-hidden="false" aria-label="Enviada" data-icon="msg-check">
     <svg
       viewBox="0 0 12 11"
-      height="11"
-      width="16"
+      height={height}
+      width={width}
       preserveAspectRatio="xMidYMid meet"
       fill="none"
     >
@@ -21,7 +21,7 @@ const SentStatus = () => (
 );
 
 // Componente de Status Entregue
-const DeliveredStatus = () => (
+const DeliveredStatus = ({ height = "11", width = "16" }) => (
   <span
     aria-hidden="false"
     aria-label="Entregue"
@@ -30,8 +30,8 @@ const DeliveredStatus = () => (
   >
     <svg
       viewBox="0 0 16 11"
-      height="11"
-      width="16"
+      height={height}
+      width={width}
       preserveAspectRatio="xMidYMid meet"
       className=""
       fill="none"
@@ -46,18 +46,18 @@ const DeliveredStatus = () => (
 );
 
 // Componente de Status Lido
-const ReadStatus = () => (
+const ReadStatus = ({ height = "11", width = "16" }) => (
   <span
     aria-hidden="false"
-    aria-label=" Lida "
+    aria-label="Lida"
     data-icon="msg-dblcheck"
     className="x1q15gih"
     style={{ color: "#53bdeb" }}
   >
     <svg
       viewBox="0 0 16 11"
-      height="11"
-      width="16"
+      height={height}
+      width={width}
       preserveAspectRatio="xMidYMid meet"
       fill="none"
     >
@@ -72,11 +72,12 @@ const ReadStatus = () => (
 
 const None = () => <></>;
 
-const PendingStatus = () => (
+const PendingStatus = ({ height = "16", width = "16" }) => (
   <span aria-hidden="false" aria-label="Pendente" data-icon="msg-time">
     <svg
       viewBox="0 0 16 15"
-      width="16"
+      width={width} // Usa a prop width ou o valor padrão
+      height={height} // Usa a prop height ou o valor padrão
       preserveAspectRatio="xMidYMid meet"
       enableBackground="new 0 0 16 15"
     >
@@ -88,7 +89,6 @@ const PendingStatus = () => (
     </svg>
   </span>
 );
-
 
 const FailedStatus = () => (
   <span
@@ -125,4 +125,11 @@ const FailedStatus = () => (
     </svg>
   </span>
 );
-export { SentStatus, DeliveredStatus, ReadStatus, PendingStatus, None , FailedStatus};
+export {
+  SentStatus,
+  DeliveredStatus,
+  ReadStatus,
+  PendingStatus,
+  None,
+  FailedStatus,
+};

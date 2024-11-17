@@ -52,7 +52,7 @@ export default function ImageAttachment(props) {
           </button>
         </div>
         <img
-          src={fileby_content?.file_url || imgSrc || "https://flowbite.com/docs/images/blog/image-2.jpg"} // Exibe a imagem em base64 ou uma imagem padrão
+          src={fileby_content?.file_url || "https://flowbite.com/docs/images/blog/image-2.jpg"} // Exibe a imagem em base64 ou uma imagem padrão
           className="rounded-lg w-[350px]"
           alt="Preview"
         />

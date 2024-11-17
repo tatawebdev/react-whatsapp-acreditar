@@ -6,19 +6,12 @@ import FooterChat from "../components/Chat/FooterChat";
 import { useSelectedUser } from "../context/contatos/SelectedUserContext";
 import Voice from "../components/BaloesChat/VoiceRecorder";
 
-
-
 const ChatScreen = () => {
   const { selectedUser } = useSelectedUser();
-
-
-
+  console.log(selectedUser);
   if (!selectedUser) {
     return <div></div>;
   }
- 
-
-
 
   return (
     <div className="flex flex-col bg-[#0b141a] flex-grow chat-background">
@@ -27,8 +20,7 @@ const ChatScreen = () => {
       </div>
 
       <ChatMessages />
-
-      <FooterChat />
+      {selectedUser?.isActive && <FooterChat />}
     </div>
   );
 };

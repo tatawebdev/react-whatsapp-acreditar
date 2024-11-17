@@ -3,14 +3,14 @@ import { BiSend } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { useSelectedUser } from "../../context/contatos/SelectedUserContext";
 import { sendMessageText } from "../../services/chatService";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import ImageUploadButton from "../ImageUploadButton";
+import RecordMicrophone from "./footer/RecordMicrophone";
 
 const VoiceIcon = () => {
   return (
-
     <div className="flex space-x-4 cursor-pointer">
-      {/* Botão para o primeiro ícone */}
+      {/* Botão para o primeiro ícone
       <button className="rounded ">
         <svg
           viewBox="0 0 24 24"
@@ -23,7 +23,7 @@ const VoiceIcon = () => {
       </button>
 
       {/* Botão para o segundo ícone */}
-      <button className="rounded ">
+      {/* <button className="rounded ">
         <svg
           viewBox="0 0 24 24"
           width="28"
@@ -32,35 +32,33 @@ const VoiceIcon = () => {
         >
           <path d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"></path>
         </svg>
-      </button>
+      </button> * */}
 
       {/* Botão para o terceiro ícone */}
       <ImageUploadButton />
     </div>
-
-
-  )
+  );
 };
 
 const MessageInput = ({ setText, text }) => {
-
   return (
-
     <input
       value={text}
       onChange={(e) => setText(e.target.value)}
-
       type="text"
       className="focus:outline-none bg-[#2a3942] w-full text-[#aebac1] p-3 rounded-lg text-sm"
       placeholder="Digite uma mensagem"
     />
   );
+};
 
-}
-
-
-const BiMicrophone = ({ buttonVoice, setButtonVoice, isRecording, setIsRecording }) => {
-  const [text, setText] = useState('');
+const BiMicrophone = ({
+  buttonVoice,
+  setButtonVoice,
+  isRecording,
+  setIsRecording,
+}) => {
+  const [text, setText] = useState("");
 
   const handleButtonVoice = () => {
     if (buttonVoice || isRecording) {
@@ -98,11 +96,10 @@ const BiMicrophone = ({ buttonVoice, setButtonVoice, isRecording, setIsRecording
 };
 
 const FooterChat = () => {
+  const [text, setText] = useState("");
 
-  const [text, setText] = useState('');
-
-  const { conversationData, setConversationData, selectedUser } = useSelectedUser();
-
+  const { conversationData, setConversationData, selectedUser } =
+    useSelectedUser();
 
   const [buttonVoice, setButtonVoice] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -150,7 +147,6 @@ const FooterChat = () => {
     };
   }, [isRecording]);
 
-
   const sendMessage = async (e) => {
     e.preventDefault();
     const unique_identifier = uuidv4();
@@ -160,50 +156,65 @@ const FooterChat = () => {
       {
         content: text,
         sent_by_user: 0,
-        status: 'pending',
+        status: "pending",
         timestamp: Date.now(),
         type: "message_text",
-        unique_identifier
+        unique_identifier,
       },
     ]);
 
     // Limpar o campo de entrada de texto
-    setText('');
-
+    setText("");
 
     try {
       const { from, contact_name } = selectedUser;
 
-      const response = await sendMessageText(text, from, contact_name, unique_identifier);
-      const status = response.error ? 'failed' : 'pending'
+      const response = await sendMessageText(
+        text,
+        from,
+        contact_name,
+        unique_identifier
+      );
+      const status = response.error ? "failed" : "pending";
       setConversationData((prevData) =>
         prevData.map((msg) => {
           // Verificar se o ID da mensagem corresponde
           //console.log(unique_identifier)
           if (msg.unique_identifier == unique_identifier) {
             return {
-              ...msg, sent_by_user: 0, status,
+              ...msg,
+              sent_by_user: 0,
+              status,
             };
           }
           return msg;
-
         })
       );
     } catch (error) {
-      console.error('Erro ao enviar a mensagem:', error);
+      console.error("Erro ao enviar a mensagem:", error);
     }
-
+  };
+  const startRecordingHandler = () => {
+    console.log("Gravação Iniciada");
   };
 
+  const cancelRecordingHandler = () => {
+    console.log("Gravação Cancelada");
+  };
 
+  const finishRecordingHandler = () => {
+    console.log("Gravação Finalizada");
+  };
   return (
-    <form onSubmit={sendMessage} className="flex flex-none space-x-2 items-center bg-[#202c33] px-6 py-4">
+    <form
+      onSubmit={sendMessage}
+      className="flex flex-none space-x-2 items-center bg-[#202c33] px-6 py-4"
+    >
       {!buttonVoice && <VoiceIcon />}
 
       <div className="flex flex-grow items-center space-x-4">
         {!buttonVoice ? (
-          <MessageInput text={text}
-            setText={setText} />
+          <MessageInput text={text} setText={setText} />
         ) : (
           <div className="flex flex-grow items-center space-x-4">
             {isRecording ? <p>Gravando...</p> : <p>Pressione para gravar</p>}
@@ -211,20 +222,17 @@ const FooterChat = () => {
         )}
         {!text ? (
           <>
-            {/* <BiMicrophone
-              buttonVoice={buttonVoice}
-              isRecording={isRecording}
-              setButtonVoice={setButtonVoice}
-              setIsRecording={setIsRecording}
+            <RecordMicrophone
+              startRecording={startRecordingHandler}
+              cancelRecording={cancelRecordingHandler}
+              finishRecording={finishRecordingHandler}
             />
-             */}
           </>
         ) : (
           <button>
             <MdSend className="text-teal-700 text-2xl" />
           </button>
         )}
-
       </div>
     </form>
   );

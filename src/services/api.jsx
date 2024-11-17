@@ -28,7 +28,7 @@ function handleError(error) {
 }
 
 // Função específica para enviar imagens usando FormData
-export const postImage = async (endpoint, formData) => {
+export const postFile = async (endpoint, formData) => {
     try {
       const response = await AxiosInstance.post(endpoint, formData, {
         headers: {

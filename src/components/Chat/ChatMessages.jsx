@@ -5,9 +5,13 @@ import { messaging } from "../../services/firebaseConfig";
 import { onMessage } from "firebase/messaging";
 import ImageAttachment from "../BaloesChat/ImageAttachment";
 
+import alertSound from "../../assets/audio/alert.mp3";
+import VoiceNote from "../BaloesChat/VoiceNote";
+
 const componentMap = {
   message_text: MessageText,
   image: ImageAttachment,
+  audio: VoiceNote,
 };
 
 export default function ChatMessages() {
@@ -27,6 +31,7 @@ export default function ChatMessages() {
   useEffect(() => {
     const unsubscribe = onMessage(messaging, (payload) => {
       //console.log("Mensagem recebida em primeiro plano:", payload);
+
 
       // Extrair os dados da mensagem
       const newMessage = payload.data;
@@ -51,6 +56,15 @@ export default function ChatMessages() {
           })
         );
       } else {
+
+        const audio = new Audio(alertSound);
+        audio.play();
+        setTimeout(() => {
+          audio.pause();
+          audio.currentTime = 0;
+        }, 3000); // 2 segundos
+  
+
         newMessage.sent_by_user = 1;
 
         console.log(newMessage, "content_content_newMessage");
@@ -58,7 +72,7 @@ export default function ChatMessages() {
       }
     });
 
-    // return () => unsubscribe();
+    return () => unsubscribe();
   }, [conversationData]);
 
   return (

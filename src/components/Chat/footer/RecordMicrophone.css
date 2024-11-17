@@ -1,0 +1,29 @@
+.circle-before::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #e53935;
+    margin-right: 7px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@-webkit-keyframes pulse {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+#record-microphone-timer {
+    display: flex;
+    align-items: center;
+    opacity: 1;
+}

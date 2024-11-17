@@ -1,6 +1,7 @@
-// Funções para enviar e receber mensagens
-import { post, postImage, get } from "./api";
+import { post, postFile, get } from "./api";
+import { encodeAudioBufferLame } from "./audioService";
 
+// Função para enviar mensagens de texto
 export const sendMessageText = async (
   content,
   from,
@@ -17,34 +18,59 @@ export const sendMessageText = async (
     });
     return response;
   } catch (error) {
-    console.log("Error sending message:", error);
+    console.error("Error sending message:", error);
     throw error;
   }
 };
 
+// Função para enviar imagens
 export const sendMessageImage = async (file, from, contact_name) => {
   try {
-    // Cria um FormData para enviar a imagem
     const formData = new FormData();
     formData.append("file", file);
     formData.append("from", from);
     formData.append("contact_name", contact_name);
 
-    // Faz a requisição para enviar a imagem
-    const response = await postImage("/chat/send/image", formData);
+    const response = await postFile("/chat/send/image", formData);
     return response;
   } catch (error) {
-    console.log("Error sending image:", error);
+    console.error("Error sending image:", error);
     throw error;
   }
 };
 
-export const getImage = async (file_id) => {
+// Função para buscar imagens
+export const getResourcebyFileID = async (file_id) => {
   try {
     const response = await get(`/resources/${file_id}`, "GET");
     return response?.data?.file_url;
   } catch (error) {
     console.error("Error fetching image:", error);
+    throw error;
+  }
+};
+
+// Função para enviar áudio
+export const sendAudioToServer = async (wavAudioBlob, from, contact_name) => {
+  try {
+    const audioFile = new File([wavAudioBlob], "file.wav", { type: "audio/wav" });
+
+    // Configura o FormData para envio
+    const formData = new FormData();
+    formData.append("audio", audioFile);
+    formData.append("from", from);
+    formData.append("contact_name", contact_name);
+
+    // Depuração: Verifica os dados do FormData
+    formData.forEach((value, key) => {
+      console.log(`${key}:`, value);
+    });
+
+    const response = await postFile("/chat/send/audio", formData);
+    console.log("Audio sent successfully:", response);
+    return response;
+  } catch (error) {
+    console.error("Error sending audio:", error);
     throw error;
   }
 };
